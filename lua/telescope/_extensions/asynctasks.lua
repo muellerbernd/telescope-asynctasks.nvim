@@ -4,6 +4,7 @@ local pickers = require('telescope.pickers')
 local sorters = require('telescope.sorters')
 local state = require('telescope.actions.state')
 
+local last_selection_index = 0
 
 return require('telescope').register_extension {
     exports = {
@@ -18,6 +19,7 @@ return require('telescope').register_extension {
 
             local  tasks_formatted = {}
 
+
             for i = 1, #tasks do
                 local current_task = table.concat(tasks[i], " | ")
                 table.insert(tasks_formatted, current_task)
@@ -29,10 +31,12 @@ return require('telescope').register_extension {
                     results = tasks_formatted
                 },
                 sorter = sorters.get_generic_fuzzy_sorter(),
+                default_selection_index = last_selection_index,
                 attach_mappings = function(prompt_bufnr, map)
 
                     local start_task = function()
                         local selection = state.get_selected_entry(prompt_bufnr)
+                        last_selection_index = selection.index
                         actions.close(prompt_bufnr)
 
                         local task_name = tasks[selection.index][1]
