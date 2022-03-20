@@ -20,7 +20,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " install this integration
-Plug 'GustavoKatel/telescope-asynctasks.nvim'
+Plug 'muellerbernd/telescope-asynctasks.nvim'
 ```
 
 # Usage
